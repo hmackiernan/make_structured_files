@@ -4,7 +4,9 @@ use Data::Dumper;
 use IO::File;
 use Getopt::Long;
 
-my %opt = ();
+my %opt = (
+
+	  );
 
 GetOptions(\%opt,
 	   "filename:s",
@@ -14,6 +16,29 @@ GetOptions(\%opt,
 	   "overwrite:s",
 	);
 
+print "before defaults applied\n";
+print Dumper(\%opt);
+
+# arg validation
+if (!defined($opt{'num_lines'})) {
+  $opt{'num_lines'} = 10;
+  print "INFO: num_lines not specified, defaulting to $opt{'num_lines'}\n";
+}
+
+if  ( !(defined($opt{'edit_line'})) and (defined($opt{'content'}))) {
+  print "ERROR: no edit_line specified but content specified, exit.\n";
+  exit 1;
+}
+
+
+if  ( (defined($opt{'edit_line'}) and (!defined($opt{'content'} )))) {
+  $opt{'content'} = "blargh";
+  print "INFO: edit_line specified but no content, defaulting to \"blargh\"\n";
+}
+
+
+
+print "After defaults applied\n";
 print Dumper(\%opt);
 
 
