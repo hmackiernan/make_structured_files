@@ -1,3 +1,4 @@
+#!/usr/local/perl-5.14.1/bin/perl
 use strict;
 use File::Path qw(mkpath);
 use Data::Dumper;
@@ -14,12 +15,20 @@ GetOptions(\%opt,
 	   "edit_line:s",
 	   "content:s",
 	   "overwrite:s",
+	   "debug:s",
 	);
 
-print "before defaults applied\n";
-print Dumper(\%opt);
-
+my $debug = $opt{'debug'};
+if ($debug) {
+    print "before defaults applied\n";
+    print Dumper(\%opt);
+}
 # arg validation
+if (!defined($opt{'filename'})) {
+    print "ERROR: filename not specified. exit.\n";
+    exit 1;
+}
+
 if (!defined($opt{'num_lines'})) {
   $opt{'num_lines'} = 10;
   print "INFO: num_lines not specified, defaulting to $opt{'num_lines'}\n";
@@ -37,10 +46,10 @@ if  ( (defined($opt{'edit_line'}) and (!defined($opt{'content'} )))) {
 }
 
 
-
-print "After defaults applied\n";
-print Dumper(\%opt);
-
+if ($debug) {
+    print "After defaults applied\n";
+    print Dumper(\%opt);
+}
 
 
 if (-e $opt{'filename'}) {
@@ -51,7 +60,7 @@ if (-e $opt{'filename'}) {
     print " and overwrite specified, proceeding\n";
   }
 } else {
-  print "$opt{'filename'} does not exist, creating with $opt{'num_lines'} lines\n";
+  print "INFO: $opt{'filename'} does not exist, creating with $opt{'num_lines'} lines\n";
 }
 
 
