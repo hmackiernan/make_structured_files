@@ -37,12 +37,11 @@ if (!defined($opt{'filename'})) {
 
 # some combinations or lack of combinations of arguments don't make sense
 
-# You asked us to insert some content, but didn't say where
+# You asked us to insert some content, but didn't say where and there's no sensible default
 if  ( !(defined($opt{'edit_line'})) and (defined($opt{'content'}))) {
   print "ERROR: no edit_line specified but content specified, exit.\n";
   exit 1;
 }
-
 
 # You asked us to to edit a line, but didn't say with what; use default content
 if  ( (defined($opt{'edit_line'}) and (!defined($opt{'content'} )))) {

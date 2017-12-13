@@ -1,6 +1,6 @@
 case	filename	num_lines	line_to_edit	content	file_exists?	do_what
 1	undef	*	*	*	n/a	error/exit, must specify filename
-2	foo	undef	undef	undef	no	create foo with default number of lines
+2	foo	undef	undef	undef	no	create foo with default number of lines and no content
 3	foo	undef	undef	undef	yes	prompt for overwrite, and if yes create foo with default number of lines
 4	foo	8	undef	undef	no	create foo with 8 lines
 5	foo	8	undef	undef	yes	prompt for overwrite and if yes, create foo with 8 lines
@@ -14,6 +14,8 @@ case	filename	num_lines	line_to_edit	content	file_exists?	do_what
 13	foo	8	4	blargh	no	create foo with 8 lines and specified content at line 4
 14	foo	8	4	blargh	yes	edit existing file at line 4 with default content (num_lines is ignored)
 15	foo	8	12	undef	no	create file with 12 lines with default content at lne 12 (num_lines is ignored)
+16	foo	8	12	undef	yes	edit existing file at line 12 with default content  (num_lines is ignored)
 17	foo	8	12	blargh	no	create file with 12 lines with specified content at lne 12 (num_lines is ignored)
-16	foo	*	"1000"	undef	yes	error/exit; line_to_edit greater than num_lines
-18	foo	*	"1000"	blargh	yes	error/exit; line_to_edit greater than num_lines
+18	foo	8	12	blargh	yes	edit existing file at line 12 with specified content  (num_lines is ignored)
+19	foo	*	"1000"	undef	yes	error/exit; line_to_edit greater than num_lines
+20	foo	*	"1000"	blargh	yes	error/exit; line_to_edit greater than num_lines
