@@ -86,11 +86,15 @@ if ($debug) {
 
 if (-e $opt{'filename'}) {
   print "$opt{'filename'} exists";
+# if (no edit specified)
   if (!defined($opt{'overwrite'})) {
     print " re-run with --overwwrite=1 to overwrite existing file\n";
   } else {
     print " and overwrite specified, proceeding\n";
   }
+  # else (edit specified)
+  # read the file
+
 } else {
   print "INFO: $opt{'filename'} does not exist, creating with $opt{'num_lines'} lines\n";
   my $fh = IO::File->new(">$opt{'filename'}");
@@ -133,5 +137,11 @@ sub create_content {
   }
 
   return $line_hr;
+  
+}
+
+# use on an existing line_hr read from existing file
+sub edit_content {
+
   
 }
