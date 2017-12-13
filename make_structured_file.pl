@@ -68,6 +68,7 @@ if ($debug) {
 
 # it exists, and you haven't specified an edit, must be asking to create; specify overwrite to continue if you haven't already
 
+# TODO: See below; this logic is missing from the conditional currently
 # it exists, and you have specified an edit, read the file and note its length (number of lines / 2, I guess?)
 # -- edit_line is less than or equal to the length of the file do the edit at edit_line and return the edited content
 # -- edit_line is greater than length of the file: 
@@ -79,6 +80,10 @@ if ($debug) {
 # -- num_lines is less than edit_line; emit a warning, ignore num_lines and put the edit at edit_line instead? or just error
 # -- num_lines is greater than than edit_line; create the file with num_lines and the edit at edit_line
 # -- num lines is equal to edit_line; create the file with num_lines and the edit at edit_line, which happens to be num_line (duh!)
+
+# TODO:
+# The logic below is incomplete; we need to check if the file exists and 'edit is specified'; in that case we don't need overwrite; we just
+# make the edit. only if no 'edit is specified' and the file exists to we require --overwrite before (re)creating the file blank with the specified number of lines
 
 if (-e $opt{'filename'}) {
   print "$opt{'filename'} exists";
