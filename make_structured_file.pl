@@ -44,10 +44,18 @@ if  ( !(defined($opt{'edit_line'})) and (defined($opt{'content'}))) {
 }
 
 # You asked us to to edit a line, but didn't say with what; use default content
-if  ( (defined($opt{'edit_line'}) and (!defined($opt{'content'} )))) {
-  $opt{'content'} = "blargh";
-  print "INFO: edit_line specified but no content, defaulting to \"blargh\"\n";
+if  ( (defined($opt{'edit_line'}))) {
+  if (!defined($opt{'content'} ) ){
+    print "INFO: edit_line specified but no content, defaulting to \"blargh\"\n";
+    $opt{'content'} = "blargh";
+  }
+  if (defined($opt{'num_lines'})) {
+    print "INFO: both edit_line and num_lines specified; num_lines ignored\n";
+  }
+      
 }
+
+
 
 # specifying an edit_line and either specifying content explicitly with --content
 # (or fallling int the default) case counts as "Having specified an edit" (see below)
