@@ -1,0 +1,21 @@
+create file
+-filename (required)
+-number of lines (optional, defaults)
+
+file exists? - error, can't create with existing filename
+
+file doesn't exist?
+- generate content of num_lines or default
+- write content to file
+
+
+edit existing {
+-filename (required)
+-line to edit (required)
+-text to edit with (optional, defaults)
+
+file exists?
+  open it, read content, make the edit, write the content back
+
+file doesn't exist?
+ - error; can't edit a nonexistent file
